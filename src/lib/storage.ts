@@ -1,6 +1,15 @@
 import { Assistencia } from '@/types/assistencia';
+import { mockAssistencias } from './mockData';
 
 const STORAGE_KEY = 'tecno2000_assistencias';
+const SEED_KEY = 'tecno2000_seeded';
+
+export function seedMockData(): void {
+  if (typeof window === 'undefined') return;
+  if (localStorage.getItem(SEED_KEY)) return;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(mockAssistencias));
+  localStorage.setItem(SEED_KEY, 'true');
+}
 
 export function getAssistencias(): Assistencia[] {
   if (typeof window === 'undefined') return [];
